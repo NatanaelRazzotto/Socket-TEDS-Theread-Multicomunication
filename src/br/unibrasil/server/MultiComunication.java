@@ -7,17 +7,19 @@ import java.util.Scanner;
 public class MultiComunication implements Runnable {
 	
 	private Socket client;
+	private IMultiComunication iMultiComunication;
 
-	public MultiComunication(Socket client)
+	public MultiComunication(IMultiComunication iMultiComunication, Socket client)
 	{
-		this.client = client;		
+		this.client = client;	
+		this.iMultiComunication = iMultiComunication;
 	}
 	
 	public void run() 
 	{	
 		try {
 			int count = 0;
-			PrintStream saida = new PrintStream(client.getOutputStream());
+			//PrintStream saida = new PrintStream(client.getOutputStream());
 			Scanner scanner = new Scanner(client.getInputStream());
 			String recebido = "";
 			
@@ -26,8 +28,9 @@ public class MultiComunication implements Runnable {
 				count++; 
 				try {
 					recebido = scanner.nextLine();
-					System.out.println(recebido);		
-					saida.println(count +" - Mensagens Recebidas");
+					iMultiComunication.SendAll(recebido);
+					//System.out.println(recebido);		
+					//saida.println(count +" - Mensagens Recebidas");
 				} catch (Exception e) {
 					recebido = "SAIR";
 				}					
