@@ -6,23 +6,29 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class CliSocket {
+	private String host;
+	private int port;
+	
+	public CliSocket() {		
+		this.host = "127.0.0.1";
+		this.port = 12345;		
+	}
 
-	public void execute() {
-		Scanner teclado = new Scanner(System.in);
+	public void execute() {		
 		try {
-			Socket client = new Socket("127.0.0.1",12345);
+			Socket client = new Socket(host,port);
+			Scanner teclado = new Scanner(System.in);
 			PrintStream saida = new PrintStream(client.getOutputStream());
-			Scanner scanner = new Scanner(client.getInputStream());
+			System.out.println("Cliente conectado no servidor");			
+			
+			//Scanner scanner = new Scanner(client.getInputStream());//			
+			new Thread(new ReceiveMessages(client.getInputStream())).start();
 			
 			String linha = "";
 			while ((!linha.toUpperCase().equals("SAIR"))&&(!linha.toUpperCase().equals("FECHAR"))) {
 				linha = teclado.nextLine();
-				//envia
 				saida.println(linha);
-				//Tudo que chegar do server ele vai mostrar
-				System.out.println(scanner.nextLine());
-				
-				
+				//System.out.println(scanner.nextLine());					
 			}			
 			
 		} catch (IOException e) {

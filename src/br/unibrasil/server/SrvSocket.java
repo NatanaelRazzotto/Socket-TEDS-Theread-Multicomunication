@@ -16,7 +16,8 @@ public class SrvSocket implements IMultiComunication {
 				while(true) 
 				{					
 					System.out.println("Aguardando conexão");
-					Socket client = server.accept();//Eu recebo o client podemos partir desse
+					Socket client = server.accept();
+					//Eu recebo o client podemos partir desse
 					System.out.println("Conectou!!");
 					//todo client que se conecta guardamos numa lista
 					//listClient.add(client);
