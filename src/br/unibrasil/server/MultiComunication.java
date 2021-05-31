@@ -29,7 +29,7 @@ public class MultiComunication implements Runnable {
 				try {
 					recebido = scanner.nextLine();
 					iMultiComunication.SendAll(recebido);
-					//System.out.println(recebido);		
+					System.out.println("SERVER" + recebido);		
 					//saida.println(count +" - Mensagens Recebidas");
 				} catch (Exception e) {
 					recebido = "SAIR";

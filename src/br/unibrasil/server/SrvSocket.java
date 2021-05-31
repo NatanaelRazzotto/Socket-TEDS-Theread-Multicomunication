@@ -28,8 +28,7 @@ public class SrvSocket implements IMultiComunication {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		
 	}
 	@Override
