@@ -9,7 +9,7 @@ public class CliSocket {
 	private String host;
 	private int port;
 	
-	public CliSocket() {		
+	public CliSocket(String host,int port) {		
 		this.host = "127.0.0.1";
 		this.port = 12345;		
 	}
@@ -19,7 +19,8 @@ public class CliSocket {
 			Socket client = new Socket(host,port);
 			Scanner teclado = new Scanner(System.in);
 			PrintStream saida = new PrintStream(client.getOutputStream());
-			System.out.println("Cliente conectado no servidor");			
+			System.out.println("Cliente conectado no servidor");
+			System.out.println("Para encerrar o Cliente: SAIR;");
 			
 			//Scanner scanner = new Scanner(client.getInputStream());//			
 			new Thread(new ReceiveMessages(client.getInputStream())).start();
